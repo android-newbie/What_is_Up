@@ -1,0 +1,73 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.WhatIsUp" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/organizer_color</item>
+        <item name="colorPrimaryVariant">@color/organizer_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
+    </style>
+
+<!--    Own Theme/ Custom Theme-->
+    <style name="WhiteStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
+
+    <style name="CustomShapeAppearance">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        <!-- Or if wants different radii depending on the corner. -->
+        <item name="neumorph_cornerSizeTopLeft">5dp</item>
+        <item name="neumorph_cornerSizeTopRight">5dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">5dp</item>
+        <item name="neumorph_cornerSizeBottomRight">5dp</item>
+    </style>
+
+
+
+    <style name="CustomShapeAppearanceProfile">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">32dp</item>
+
+        Or if wants different radii depending on the corner.
+        <item name="neumorph_cornerSizeTopLeft">10dp</item>
+        <item name="neumorph_cornerSizeTopRight">10dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">10dp</item>
+        <item name="neumorph_cornerSizeBottomRight">10dp</item>
+    </style>
+
+
+    <style name="CustomShapeAppearanceProfilePicActivity">
+        <item name="neumorph_cornerFamily">oval</item>
+        <item name="neumorph_cornerSize">10dp</item>
+
+        Or if wants different radii depending on the corner.
+        <item name="neumorph_cornerSizeTopLeft">50dp</item>
+        <item name="neumorph_cornerSizeTopRight">50dp</item>
+        <item name="neumorph_cornerSizeBottomLeft">50dp</item>
+        <item name="neumorph_cornerSizeBottomRight">50dp</item>
+    </style>
+
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottomsheet_bg</item>
+
+    </style>
+</resources>

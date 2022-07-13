@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgColor"
+    android:fitsSystemWindows="true"
+    tools:context=".ChatDetailed">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messagesRecyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardViewTypeMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/neumorphCardView" />
+
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/cardViewTypeMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/imageView12"
+
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:neumorph_lightSource="rightBottom"
+        app:neumorph_shadowElevation="10dp"
+        app:neumorph_shapeType="pressed">
+
+
+        <EditText
+
+            android:id="@+id/typeMessage"
+
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_bg"
+            android:hint="Type a message"
+            android:imeOptions="flagNoEnterAction"
+            android:maxHeight="150dp"
+            android:minHeight="40dp"
+            android:padding="10dp" />
+
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorphCardView"
+        style="@style/Widget.Neumorph.CardView"
+        android:layout_width="match_parent"
+        android:elevation="20dp"
+        android:padding="10dp"
+
+
+
+
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+        app:neumorph_shapeType="flat">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/mToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:backgroundTint="@color/organizer_color"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivBackArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back_arrow"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Piyush Verma"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/imgCardView"
+                    app:layout_constraintTop_toTopOf="@+id/imgCardView" />
+
+
+                <TextView
+                    android:id="@+id/tvLastSeen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alef_bold"
+                    android:text="Online"
+                    android:textColor="#F6E102"
+                    android:textDirection="inherit"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/tvName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imgCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+
+                    app:cardCornerRadius="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivBackArrow"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/reasonswhy">
+
+                    <ImageView
+                        android:id="@+id/ivProfilePic"
+                        android:layout_width="40dp"
+
+                        android:layout_height="40dp"
+                        android:src="@drawable/reasonswhy" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <soup.neumorphism.NeumorphImageView
+                    android:id="@+id/ivStatusOnlineWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_status_online_white"
+                    android:tint="@color/white"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivMenu"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <soup.neumorphism.NeumorphImageView
+                    android:id="@+id/ivPhoneCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_phonecall"
+                    android:tint="@color/white"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivStatusOnlineWhite"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <soup.neumorphism.NeumorphImageView
+                    android:id="@+id/ivMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_menu"
+                    android:tint="@color/white"
+
+
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/sendButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+
+        android:padding="18dp"
+        android:src="@drawable/ic_send"
+        android:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/cardViewTypeMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardViewTypeMessage"
+
+
+        app:neumorph_backgroundColor="@color/organizer_color"
+        app:neumorph_shadowElevation="5dp"
+        app:neumorph_shapeType="flat" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/sendButton"
+        app:layout_constraintEnd_toStartOf="@+id/sendButton"
+        app:layout_constraintTop_toTopOf="@+id/sendButton"
+        app:srcCompat="@drawable/ic_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
