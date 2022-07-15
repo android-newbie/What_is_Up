@@ -11,22 +11,22 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvYourPhoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/tvYourPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/tvYourPhoneNumber" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="175dp"
-        android:text="Enter the OTP that I sent you"
+        android:layout_marginTop="140dp"
+        android:text="Sit back and relax 🧃🧃"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,4 +81,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bottomstyle" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We will automatically verify OTP"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="If automatic verification failed then enter the OTP"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="@+id/etCode"
+        app:layout_constraintStart_toStartOf="@+id/etCode"
+        app:layout_constraintTop_toBottomOf="@+id/etCode" />
+
+    <TextView
+        android:id="@+id/tvYourPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="5dp"
+        android:background="@drawable/verify_phone_number_bg"
+        android:text="tvYourPhoneNumber"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <ImageView
+        android:id="@+id/ivEditPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvYourPhoneNumber"
+        app:layout_constraintStart_toEndOf="@+id/tvYourPhoneNumber"
+        app:layout_constraintTop_toTopOf="@+id/tvYourPhoneNumber"
+        app:srcCompat="@drawable/ic_edit_icon_prof_act" />
 </androidx.constraintlayout.widget.ConstraintLayout>

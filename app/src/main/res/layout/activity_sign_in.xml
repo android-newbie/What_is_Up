@@ -94,6 +94,7 @@
         android:paddingRight="30dp"
         android:paddingTop="5dp"
         android:src="@drawable/ic_google_flat_icon"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -248,23 +249,21 @@
         android:src="@drawable/facebook"
         android:visibility="invisible"
         app:civ_border_overlay="true"
-        app:layout_constraintBottom_toBottomOf="@+id/ivPhone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageButton
         android:id="@+id/ivPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circleview"
-
-
-        android:padding="15dp"
-        android:src="@drawable/call"
-        android:visibility="invisible"
-        app:civ_border_overlay="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circular_button"
+        android:backgroundTint="@color/white"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/ivGoogle"
+        app:srcCompat="@drawable/ic_phone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

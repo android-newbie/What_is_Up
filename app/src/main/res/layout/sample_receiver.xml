@@ -67,6 +67,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/ivRecReact"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+       />
+
 </LinearLayout>
 
 

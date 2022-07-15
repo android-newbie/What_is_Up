@@ -57,6 +57,7 @@ dependencies {
     implementation 'io.github.everythingme:overscroll-decor-android:1.1.1'
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
     implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation "com.github.pgreze:android-reactions:1.6"
     //firebase libraries
    // implementation platform('com.google.firebase:firebase-bom:30.0.1')
     implementation 'com.google.firebase:firebase-auth:19.3.2' //only this version allow phone sign in ,by changing this we get an error

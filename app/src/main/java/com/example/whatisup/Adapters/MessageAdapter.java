@@ -4,17 +4,20 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.whatisup.Models.MessageModel;
 import com.example.whatisup.R;
 import com.example.whatisup.ViewHolders.ReceiverViewHolder;
 import com.example.whatisup.ViewHolders.SenderViewHolder;
+import com.github.pgreze.reactions.ReactionPopup;
+import com.github.pgreze.reactions.ReactionsConfig;
+import com.github.pgreze.reactions.ReactionsConfigBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
@@ -23,10 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import static java.security.AccessController.getContext;
 
 public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
 
@@ -74,12 +74,56 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         MessageModel messageModel=messageOriginalList.get(position);
+
+        //Setting Reactions on messages
+        int[] reactions =new int[]{
+                R.drawable.ic_fb_like,
+                R.drawable.ic_fb_love,
+                R.drawable.ic_fb_laugh,
+                R.drawable.ic_fb_wow,
+                R.drawable.ic_fb_sad,
+                R.drawable.ic_fb_angry
+        };
+        ReactionsConfig config = new ReactionsConfigBuilder(context)
+                .withReactions(reactions)
+                .build();
+        ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
+            if (holder.getClass()==SenderViewHolder.class){
+                SenderViewHolder viewHolder=(SenderViewHolder)holder;
+                viewHolder.ivSndReact.setImageResource(reactions[pos]);
+            }else{
+                ReceiverViewHolder viewHolder=(ReceiverViewHolder) holder;
+                viewHolder.ivRecReact.setImageResource(reactions[pos]);
+            }
+            return true; // true is closing popup, false is requesting a new selection
+        });
+
+
+
+
         if (holder.getClass()==SenderViewHolder.class){ //used to get all viewHolder classes at run time and compare
             ((SenderViewHolder)holder).tvSndMsg.setText(messageModel.getMessage());
             ((SenderViewHolder)holder).tvSndTime.setText(new SimpleDateFormat("HH:mm").format(new Date(messageModel.getTimeStamp())));
+
+             holder.itemView.setOnTouchListener(new View.OnTouchListener() {
+                 @Override
+                 public boolean onTouch(View view, MotionEvent motionEvent) {
+                     popup.onTouch(view,motionEvent);
+                     return false;
+                 }
+             });
         }else{
             ((ReceiverViewHolder)holder).tvRecMsg.setText(messageModel.getMessage());
             ((ReceiverViewHolder)holder).tvRecTime.setText(new SimpleDateFormat("HH:mm").format(new Date(messageModel.getTimeStamp())));
+
+            holder.itemView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    popup.onTouch(view,motionEvent);
+                    return false;
+                }
+            });
+
         }
 
 

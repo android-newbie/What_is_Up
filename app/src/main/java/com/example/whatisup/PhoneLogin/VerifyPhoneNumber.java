@@ -1,16 +1,15 @@
 package com.example.whatisup.PhoneLogin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.whatisup.MainActivity;
+import com.example.whatisup.PhoneLoginDetails;
 import com.example.whatisup.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,19 +20,28 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class VerifyPhoneNumber extends AppCompatActivity {
     //Declaration xml layout Variables
     EditText etCode;
     Button btnVerify;
+    TextView tvYourPhoneNumber;
+    ImageView ivEditYourPhoneNumber;
     // string for storing our verification ID
     String mVerificationId;
 
     //Declaration Firebase Variables
     FirebaseAuth mAuth;
+    FirebaseDatabase database;
 
+    //
+    String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +53,20 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         //Initialization App Variables
         etCode=findViewById(R.id.etCode);
         btnVerify=findViewById(R.id.btnVerify);
+        tvYourPhoneNumber=findViewById(R.id.tvYourPhoneNumber);
+        ivEditYourPhoneNumber=findViewById(R.id.ivEditPhoneNumber);
+
 
         //Initialization Firebase Variables
         mAuth=FirebaseAuth.getInstance();
+        database=FirebaseDatabase.getInstance();
 
         //getting mobile number from the previous activity
         //and sending the verification code to the number
         Intent intent=getIntent();
-        String phoneNumber=intent.getStringExtra("phoneNumber");
+         phoneNumber=intent.getStringExtra("phoneNumber");
+         //use to set phone number
+         tvYourPhoneNumber.setText(phoneNumber);
         sendVerificationCode(phoneNumber);
 
 
@@ -61,17 +75,30 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String code=etCode.getText().toString().trim();
-                if(code.isEmpty()||code.length()<6){
-                    etCode.setError("Enter the valid code");
-                    etCode.requestFocus();
-                }
+                try {
+                    String code=etCode.getText().toString().trim();
+                    if(code.isEmpty()||code.length()<6){
+                        etCode.setError("Enter the valid code");
+                        etCode.requestFocus();
+                    }
 
-                //verifying the code entered manually
-                verifyVerificationCode(code);
+                    //verifying the code entered manually
+                    verifyVerificationCode(code);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
         });
+
+        ivEditYourPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
 
     }
@@ -155,8 +182,10 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //check condition
                         if(task.isSuccessful()){
+
+
                             //verification successful we will start the main activity
-                            startActivity(new Intent(VerifyPhoneNumber.this, MainActivity.class)
+                            startActivity(new Intent(VerifyPhoneNumber.this, PhoneLoginDetails.class)
                                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK));
                         }else{
                             //verification unsuccessful....display an error message
@@ -174,4 +203,6 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

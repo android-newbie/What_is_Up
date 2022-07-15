@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ReceiverViewHolder extends RecyclerView.ViewHolder {
    public TextView tvRecMsg,tvRecTime;
+   public ImageView ivRecReact;
 
 
     public ReceiverViewHolder(@NonNull View itemView) {
@@ -18,6 +19,7 @@ public class ReceiverViewHolder extends RecyclerView.ViewHolder {
 
         tvRecMsg=itemView.findViewById(R.id.tvRecMsg);
         tvRecTime=itemView.findViewById(R.id.tvRecTime);
+        ivRecReact=itemView.findViewById(R.id.ivRecReact);
 
 
 

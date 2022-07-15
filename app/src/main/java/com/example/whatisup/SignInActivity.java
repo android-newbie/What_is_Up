@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.whatisup.Models.Users;
+import com.example.whatisup.PhoneLogin.EnterPhoneNumber;
 import com.example.whatisup.databinding.ActivitySignInBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -74,7 +75,13 @@ public class SignInActivity extends AppCompatActivity {
         mGoogleSignInClient=GoogleSignIn.getClient(this,gso);
 
 
-
+        binding.ivPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SignInActivity.this, EnterPhoneNumber.class);
+                startActivity(intent);
+            }
+        });
 
 
         binding.ivGoogle.setOnClickListener(new View.OnClickListener() {

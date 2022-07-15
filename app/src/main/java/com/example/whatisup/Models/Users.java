@@ -12,6 +12,7 @@ public class Users {
    String about;
    String status;
    Long timestamp;
+   String phoneNumber;
 
    public Long getTimestamp() {
       return timestamp;
@@ -110,4 +111,14 @@ public class Users {
    public void setStatus(String status) {
       this.status = status;
    }
+
+   public String getPhoneNumber() {
+      return phoneNumber;
+   }
+
+   public void setPhoneNumber(String phoneNumber) {
+      this.phoneNumber = phoneNumber;
+   }
 }
+
+

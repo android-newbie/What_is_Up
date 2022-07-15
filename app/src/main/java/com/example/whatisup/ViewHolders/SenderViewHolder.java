@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SenderViewHolder extends RecyclerView.ViewHolder {
 
      public TextView tvSndMsg,tvSndTime;
+     public ImageView ivSndReact;
 
     public SenderViewHolder(@NonNull View itemView) {
         super(itemView);
         tvSndMsg=itemView.findViewById(R.id.tvSndMsg);
         tvSndTime=itemView.findViewById(R.id.tvSndTime);
+        ivSndReact=itemView.findViewById(R.id.ivSendReact);
 
 
 

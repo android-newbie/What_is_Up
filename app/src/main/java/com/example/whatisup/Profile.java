@@ -78,6 +78,7 @@ public class Profile extends AppCompatActivity {
                                     .placeholder(R.drawable.ic_defaultprofilepic)
                                     .into(binding.ivProfilePhotoProfAct);
 
+                            binding.tvPhone.setText(users.getPhoneNumber());
                             binding.tvEmailProfAct.setText(users.getEmail());
                             binding.tvProfActName.setText(users.getName());
                             binding.tvProActAbout.setText(users.getAbout());
