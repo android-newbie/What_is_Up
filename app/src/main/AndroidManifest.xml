@@ -35,7 +35,7 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteStatusBar"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".PhoneLogin.VerifyPhoneNumber"
             android:exported="false"

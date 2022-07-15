@@ -1,16 +1,16 @@
 package com.example.whatisup.Models;
 
 public class MessageModel {
-    String uId,message;
+    String uId,message,messageId;
     Long timeStamp;
-    int reaction;
+    int reaction=-1;
 
 
-    public MessageModel(String uId, String message,Long timeStamp,int reaction) {
+    public MessageModel(String uId, String message,Long timeStamp) {
         this.uId = uId;
         this.message = message;
         this.timeStamp=timeStamp;
-        this.reaction=reaction;
+
 
     }
 
@@ -47,5 +47,14 @@ public class MessageModel {
 
     public void setReaction(int reaction) {
         this.reaction = reaction;
+    }
+
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 }

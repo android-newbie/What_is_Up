@@ -1,5 +1,6 @@
 package com.example.whatisup.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -19,6 +20,7 @@ import com.github.pgreze.reactions.ReactionPopup;
 import com.github.pgreze.reactions.ReactionsConfig;
 import com.github.pgreze.reactions.ReactionsConfigBuilder;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import java.text.SimpleDateFormat;
@@ -37,13 +39,19 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
    private static final int SENDER_TYPE=1;
    private static final int RECEIVER_TYPE=2;
 
+   //
+    String senderRoom;
+    String receiverRoom;
+
    public MessageAdapter(){}
 
-    public MessageAdapter(ArrayList<MessageModel> messageData, Context context) {
+    public MessageAdapter(ArrayList<MessageModel> messageData, Context context,String senderRoom,String receiverRoom) {
         this.messageOriginalList =messageData;
 
    //   this. backupMessageList = new ArrayList<>(this.messageOriginalList);
         this.context = context;
+        this.senderRoom=senderRoom;
+        this.receiverRoom=receiverRoom;
     }
 
     //used to differentiate sender type and receiver type
@@ -70,6 +78,7 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
        }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
@@ -87,14 +96,40 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
         ReactionsConfig config = new ReactionsConfigBuilder(context)
                 .withReactions(reactions)
                 .build();
+
         ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
             if (holder.getClass()==SenderViewHolder.class){
                 SenderViewHolder viewHolder=(SenderViewHolder)holder;
-                viewHolder.ivSndReact.setImageResource(reactions[pos]);
+                try {
+                    viewHolder.ivSndReact.setImageResource(reactions[pos]);
+                }catch (Exception e){
+
+                }
+
             }else{
                 ReceiverViewHolder viewHolder=(ReceiverViewHolder) holder;
-                viewHolder.ivRecReact.setImageResource(reactions[pos]);
+                try {
+                    viewHolder.ivRecReact.setImageResource(reactions[pos]);
+                }catch (Exception e){
+
+                }
+
             }
+
+            messageModel.setReaction(pos);
+
+            FirebaseDatabase.getInstance().getReference()
+                    .child("chats")
+                    .child(senderRoom)
+                    .child(messageModel.getMessageId()).setValue(messageModel);
+
+
+            FirebaseDatabase.getInstance().getReference()
+                    .child("chats")
+                    .child(receiverRoom)
+                    .child(messageModel.getMessageId()).setValue(messageModel);
+
+
             return true; // true is closing popup, false is requesting a new selection
         });
 
@@ -104,25 +139,47 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
         if (holder.getClass()==SenderViewHolder.class){ //used to get all viewHolder classes at run time and compare
             ((SenderViewHolder)holder).tvSndMsg.setText(messageModel.getMessage());
             ((SenderViewHolder)holder).tvSndTime.setText(new SimpleDateFormat("HH:mm").format(new Date(messageModel.getTimeStamp())));
+            SenderViewHolder viewHolder=(SenderViewHolder)holder;
 
-             holder.itemView.setOnTouchListener(new View.OnTouchListener() {
-                 @Override
-                 public boolean onTouch(View view, MotionEvent motionEvent) {
-                     popup.onTouch(view,motionEvent);
-                     return false;
-                 }
-             });
+            if (messageModel.getReaction()>=0){
+                viewHolder.ivSndReact.setImageResource(reactions[messageModel.getReaction()]);
+            }
+
+            try {
+                viewHolder.tvSndMsg.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        popup.onTouch(view,motionEvent);
+                        return true;
+                    }
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+
         }else{
             ((ReceiverViewHolder)holder).tvRecMsg.setText(messageModel.getMessage());
             ((ReceiverViewHolder)holder).tvRecTime.setText(new SimpleDateFormat("HH:mm").format(new Date(messageModel.getTimeStamp())));
 
-            holder.itemView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    popup.onTouch(view,motionEvent);
-                    return false;
-                }
-            });
+            ReceiverViewHolder viewHolder=(ReceiverViewHolder) holder;
+
+            if (messageModel.getReaction()>=0){
+                viewHolder.ivRecReact.setImageResource(reactions[messageModel.getReaction()]);
+            }
+
+            try{
+                viewHolder.tvRecMsg.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent motionEvent) {
+                        popup.onTouch(view,motionEvent);
+                        return true;
+                    }
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
 
         }
 

@@ -92,8 +92,11 @@ public class ChatDetailed extends AppCompatActivity {
         //
         final ArrayList<MessageModel> messageModels=new ArrayList<>();
 
+        final String senderRoom=senderId+receiverId;
+        final String receiverRoom=receiverId+senderId;
+
         //setting adapter to the recycler view
-        adapter=new MessageAdapter(messageModels,this);
+        adapter=new MessageAdapter(messageModels,this,senderRoom,receiverRoom);
         binding.messagesRecyclerview.setAdapter(adapter);
 
         //setting layout manager for recycler view
@@ -103,8 +106,7 @@ public class ChatDetailed extends AppCompatActivity {
         binding.messagesRecyclerview.setLayoutManager(linearLayout);
 
 
-        final String senderRoom=senderId+receiverId;
-        final String receiverRoom=receiverId+senderId;
+
 
         //getting messages from firebase database which we were upload earlier and update into recyclerview
         database.getReference()
@@ -117,6 +119,7 @@ public class ChatDetailed extends AppCompatActivity {
                         messageModels.clear();      //avoid repeat of older messages which are already present in messageModels arrayLis
                         for (DataSnapshot dataSnapshot :snapshot.getChildren()) {
                             MessageModel model=dataSnapshot.getValue(MessageModel.class);
+                            model.setMessageId(dataSnapshot.getKey());
                             messageModels.add(model);
 
                         }
@@ -148,10 +151,13 @@ public class ChatDetailed extends AppCompatActivity {
                 // model.setTimeStamp(new Date().getTime());
                 binding.typeMessage.setText("");
 
+                //
+                 String randomKey=database.getReference().push().getKey();
+
                 //store message/model data to firebase database at sender side
                 database.getReference().child("chats")
                         .child(senderRoom)
-                        .push()
+                        .child(randomKey)
                         .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -160,7 +166,7 @@ public class ChatDetailed extends AppCompatActivity {
 
                         database.getReference().child("chats")
                                 .child(receiverRoom)
-                                .push()
+                                .child(randomKey)
                                 .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
