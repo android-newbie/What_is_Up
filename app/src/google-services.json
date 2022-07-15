@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1070853056252",
+    "firebase_url": "https://what-is-up-21057-default-rtdb.firebaseio.com",
+    "project_id": "what-is-up-21057",
+    "storage_bucket": "what-is-up-21057.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070853056252:android:4748018c73ed934d6a1979",
+        "android_client_info": {
+          "package_name": "com.example.whatisup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070853056252-es8qqggfdht18ve52so5ioe6pu434752.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.whatisup",
+            "certificate_hash": "58ff574665c47143fd33efc6b1242da25acb1099"
+          }
+        },
+        {
+          "client_id": "1070853056252-jvb4b7rtufto94jic663gg9sh1lldl9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC--_0lOLhj-GGzDOoHoyoug16b0HhteTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070853056252-jvb4b7rtufto94jic663gg9sh1lldl9e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
