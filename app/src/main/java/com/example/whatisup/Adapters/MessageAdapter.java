@@ -38,6 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
 
    private static final int SENDER_TYPE=1;
    private static final int RECEIVER_TYPE=2;
+   //
 
    //
     String senderRoom;
@@ -99,17 +100,19 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
 
         ReactionPopup popup = new ReactionPopup(context, config, (pos) -> {
             if (holder.getClass()==SenderViewHolder.class){
-                SenderViewHolder viewHolder=(SenderViewHolder)holder;
+
                 try {
-                    viewHolder.ivSndReact.setImageResource(reactions[pos]);
+                ((SenderViewHolder)holder).ivSndReact.setImageResource(reactions[pos]);
+                ((SenderViewHolder)holder).ivSndReact.setVisibility(View.VISIBLE);
                 }catch (Exception e){
 
                 }
 
             }else{
-                ReceiverViewHolder viewHolder=(ReceiverViewHolder) holder;
+
                 try {
-                    viewHolder.ivRecReact.setImageResource(reactions[pos]);
+                ((ReceiverViewHolder)holder).ivRecReact.setImageResource(reactions[pos]);
+                ((ReceiverViewHolder)holder).ivRecReact.setVisibility(View.VISIBLE);
                 }catch (Exception e){
 
                 }
@@ -139,18 +142,23 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
         if (holder.getClass()==SenderViewHolder.class){ //used to get all viewHolder classes at run time and compare
             ((SenderViewHolder)holder).tvSndMsg.setText(messageModel.getMessage());
             ((SenderViewHolder)holder).tvSndTime.setText(new SimpleDateFormat("HH:mm").format(new Date(messageModel.getTimeStamp())));
-            SenderViewHolder viewHolder=(SenderViewHolder)holder;
+
 
             if (messageModel.getReaction()>=0){
-                viewHolder.ivSndReact.setImageResource(reactions[messageModel.getReaction()]);
+               // messageModel.setReaction(reactions[messageModel.getReaction()]);
+                ((SenderViewHolder)holder).ivSndReact.setImageResource(reactions[messageModel.getReaction()]);
+                ((SenderViewHolder)holder).ivSndReact.setVisibility(View.VISIBLE);
+                //((SenderViewHolder)holder) .ivSndReact.setImageResource(reactions[messageModel.getReaction()]);
+            }else{
+                ((SenderViewHolder)holder).ivSndReact.setVisibility(View.GONE);
             }
 
-            try {
-                viewHolder.tvSndMsg.setOnTouchListener(new View.OnTouchListener() {
+          try {
+            ((SenderViewHolder)holder).tvSndMsg.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         popup.onTouch(view,motionEvent);
-                        return true;
+                        return false;
                     }
                 });
             }catch (Exception e){
@@ -162,18 +170,23 @@ public class MessageAdapter extends RecyclerView.Adapter implements Filterable {
             ((ReceiverViewHolder)holder).tvRecMsg.setText(messageModel.getMessage());
             ((ReceiverViewHolder)holder).tvRecTime.setText(new SimpleDateFormat("HH:mm").format(new Date(messageModel.getTimeStamp())));
 
-            ReceiverViewHolder viewHolder=(ReceiverViewHolder) holder;
+
 
             if (messageModel.getReaction()>=0){
-                viewHolder.ivRecReact.setImageResource(reactions[messageModel.getReaction()]);
+              //  messageModel.setReaction(reactions[messageModel.getReaction()]);
+                ((ReceiverViewHolder)holder).ivRecReact.setImageResource(reactions[messageModel.getReaction()]);
+                ((ReceiverViewHolder)holder).ivRecReact.setVisibility(View.VISIBLE);
+               // ((ReceiverViewHolder)holder).ivRecReact.setImageResource(reactions[messageModel.getReaction()]);
+            }else{
+                ((ReceiverViewHolder)holder).ivRecReact.setVisibility(View.GONE);
             }
 
             try{
-                viewHolder.tvRecMsg.setOnTouchListener(new View.OnTouchListener() {
+            ((ReceiverViewHolder)holder).tvRecMsg.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         popup.onTouch(view,motionEvent);
-                        return true;
+                        return false;
                     }
                 });
             }catch (Exception e){

@@ -123,7 +123,7 @@ public class ChatDetailed extends AppCompatActivity {
                             messageModels.add(model);
 
                         }
-                       // adapter.notifyDataSetChanged(); //used to update recyclerView at runtime
+                        adapter.notifyDataSetChanged(); //used to update recyclerView at runtime
                         binding.messagesRecyclerview.scrollToPosition(messageModels.size()-1);       //used to scroll last position of recyclerView
 
 
